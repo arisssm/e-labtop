@@ -2,7 +2,7 @@
     <div id="ProductDetailComp">
         <div class="container mb-5">
             <div class="row">
-                <div class="col-lg-6 col-12 border">
+                <div class="col-lg-6 col-12">
                     <!-- Carousel -->
                     <div id="product" class="carousel slide" data-bs-ride="carousel">
                         <!-- Indicators/dots -->
@@ -63,7 +63,7 @@
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                 Keranjang
                             </router-link>
-                            <router-link to="/keranjangpage" class="btn btn-sm ms-2 main-btn">
+                            <router-link to="/checkoutpage" class="btn btn-sm ms-2 main-btn">
                                 Pesan Sekarang
                                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
                             </router-link>

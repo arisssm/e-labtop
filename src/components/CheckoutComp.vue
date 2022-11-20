@@ -7,7 +7,7 @@
                     <div class="card mb-3 border-0">
                         <div class="row g-0">
                             <div class="col-md-3 col-12 border rounded">
-                                <img src="../assets/t480s.png" class="img-fluid roun            ded-1 img-checkout"
+                                <img src="../assets/t480s.png" class=" rounded-1 img-checkout"
                                     alt="">
                             </div>
                             <div class="col-md-9 col-12">

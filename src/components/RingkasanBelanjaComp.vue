@@ -8,12 +8,33 @@
                     <p class="pe-5 text-custom">Total Ongkos Kirim<span class="ps-5 ms-5 ">Rp. 20.000</span></p>
                     <p class="me-5 text-custom mt-5" style="font-weight:600;">Total Tagihan<span class="ps-5 ms-4"
                             style="color:#ff0000">Rp. 21.000.000</span></p>
-                            <!-- font-weight 400 -->
-                    <router-link to="/konfirmasipage" class="btn mt-3 me-5 btn-byr-sekarang text-custom">Bayar Sekarang <i class="fa fa-chevron-right"
-                            aria-hidden="true"></i></router-link>
+                    <router-link to="/konfirmasipage" class="btn mt-3 me-5 btn-byr-sekarang text-custom">Bayar Sekarang
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </router-link>
                     <!-- <button type="button" class="btn mt-3 me-5 btn-byr-sekarang">Checkout <i class="fa fa-chevron-right"
                             aria-hidden="true"></i> </button> -->
-                    <router-link to="/suksespage" type="button" class="btn mt-3 btn-btl-konfirmasi text-custom">Batalkan Pesanan</router-link>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn mt-3 btn-btl-konfirmasi text-custom" data-bs-toggle="modal" data-bs-target="#BatalkanPesanan">
+                        Batalkan Pesanan
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal" id="BatalkanPesanan" tabindex="-1" aria-labelledby="BatalkanPesananLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    Apakah anda yakin ingin membatalkan pesanan?
+                                </div>
+                                <div class="modal-footer">
+                                    <router-link to="/productdetailpage" class="btn btn-success">Iya</router-link>
+                                    <button type="button" class="btn btn-danger"
+                                        data-bs-dismiss="modal">Tidak</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -21,7 +42,7 @@
 </template>
 
 <script>
-    export default {
-        name: "RingkasanBelanjaComp",
-    };
-    </script>
+export default {
+    name: "RingkasanBelanjaComp",
+};
+</script>
