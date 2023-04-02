@@ -8,8 +8,8 @@
                 </router-link>
             </div>
         </div>
-        <ProductDetailComp/>
-        <ProductComp/>
+        <ProductDetailComp  :detailProduk='detailProduk'/>
+        <ProductComp :produk='produk' :title="'Rekomendasi Untukmu'"/>
         <FooterComp/>
     </div>
 </template>
@@ -20,6 +20,7 @@ import HeaderComp from '@/components/HeaderComp.vue';
 import ProductDetailComp from '@/components/ProductDetailComp.vue';
 import ProductComp from '@/components/ProductComp.vue';
 import FooterComp from '@/components/FooterComp.vue';
+import axios from 'axios';
 
 export default{
     name :"ProductDetailPage",
@@ -28,6 +29,44 @@ export default{
         ProductDetailComp,
         ProductComp,                
         FooterComp,
+    },
+    data(){
+        return {
+            produk: [],
+            detailProduk: []
+        }
+    },
+    methods: {
+        getProdukRec(){
+            axios
+            .get('http://127.0.0.1:8000/api/produk?rekomendasi=recommended')
+            .then((response) => {
+                this.produk = response.data.data;
+                // console.log(this.produk);//debug
+            })
+            .catch((error) => {
+                alert('Maaf, silahkan check koneksi anda!' + error );
+                //console.log(error);
+            })
+        },
+
+        getProdukDet(){
+            axios
+            .get('http://127.0.0.1:8000/api/produk?q=' + this.$route.params.id)
+            .then((response) => {
+                this.detailProduk = response.data.data;
+                console.log(this.detailProduk);//debug
+            })
+            .catch((error) => {
+                alert('Maaf, silahkan check koneksi anda!' + error );
+                //console.log(error);
+            })
+        }
+    },
+    mounted() {
+        this.getProdukRec();
+        this.getProdukDet();
+        
     },
 };
 </script>
