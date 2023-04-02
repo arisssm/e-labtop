@@ -3,7 +3,7 @@
         <HeaderComp/>
         <BreadcrumbComp/>
         <SearchComp/>
-        <ProductComp/>
+        <ProductComp :produk='produk' :title="'Pilihan Produk Untukmu'"/>
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -11,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <ProductComp/>
+        <ProductComp :produk='rekomendasiProduk' :title="'Rekomendasi Untukmu'"/>
         <FooterComp/>
     </div>
 </template>
@@ -22,6 +22,7 @@ import BreadcrumbComp from '@/components/BreadcrumbComp.vue';
 import SearchComp from '@/components/SearchComp.vue';
 import ProductComp from '@/components/ProductComp.vue'; 
 import FooterComp from '@/components/FooterComp.vue';
+import axios from 'axios';
 
 export default{
     name :"KatalogPage",
@@ -31,6 +32,43 @@ export default{
         SearchComp,
         ProductComp,
         FooterComp,
+    },
+    data() {
+        return {
+            produk: [],
+            rekomendasiProduk: [],
+        }
+    },
+    methods: {
+        getProduk(){
+            axios
+            .get("http://127.0.0.1:8000/api/produk")
+            .then((response) => {
+                this.produk = response.data.data;
+                // console.log(this.produk);//debug
+            })
+            .catch((error) => {
+                alert('Maaf, silahkan check koneksi anda!' + error );
+                //console.log(error);
+            })
+        },   
+        getProdukRec(){
+            axios
+            .get('http://127.0.0.1:8000/api/produk?rekomendasi=recommended')
+            .then((response) => {
+                this.rekomendasiProduk = response.data.data;
+                // console.log(this.produk);//debug
+            })
+            .catch((error) => {
+                alert('Maaf, silahkan check koneksi anda!' + error );
+                //console.log(error);
+            })
+        },     
+    },
+
+    mounted() {
+        this.getProduk();
+        this.getProdukRec();
     },
 };
 </script>
