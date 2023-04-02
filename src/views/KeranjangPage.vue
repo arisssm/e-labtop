@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <TableComp/>
+        <TableComp :keranjang="keranjang"/>
         
     </div>
 </template>
@@ -19,12 +19,36 @@
 
 import HeaderComp from '@/components/HeaderComp.vue';
 import TableComp from '@/components/TableComp.vue';
+import axios from 'axios';
 
 export default{
     name :"KeranjangPage",
     components:{
         HeaderComp, 
         TableComp,
+    },
+
+    data(){
+        return {
+            keranjang: [],
+        }
+    },
+    methods: {
+        getKeranjang(){
+            axios
+            .get('http://127.0.0.1:8000/api/keranjang')
+            .then((response) => {
+                this.keranjang = response.data.data;
+                // console.log(this.keranjang);//debug
+            })
+            .catch((error) => {
+                alert('Maaf, silahkan check koneksi anda!' + error );
+                //console.log(error);
+            })
+        },
+    },
+    mounted() {
+        this.getKeranjang();
     },
 };
 </script>
