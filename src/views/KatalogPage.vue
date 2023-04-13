@@ -4,13 +4,7 @@
         <BreadcrumbComp/>
         <SearchComp/>
         <ProductComp :produk='produk' :title="'Pilihan Produk Untukmu'"/>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <img class="promo2" src="../assets/promo2.png" alt="Promotion Lenovo">
-                </div>
-            </div>
-        </div>
+        <BannerduaComp :bannerdua="bannerdua"/>
         <ProductComp :produk='rekomendasiProduk' :title="'Rekomendasi Untukmu'"/>
         <FooterComp/>
     </div>
@@ -21,6 +15,7 @@ import HeaderComp from '@/components/HeaderComp.vue';
 import BreadcrumbComp from '@/components/BreadcrumbComp.vue';
 import SearchComp from '@/components/SearchComp.vue';
 import ProductComp from '@/components/ProductComp.vue'; 
+import BannerduaComp from '@/components/BannerduaComp.vue'; 
 import FooterComp from '@/components/FooterComp.vue';
 import axios from 'axios';
 
@@ -31,12 +26,14 @@ export default{
         BreadcrumbComp,
         SearchComp,
         ProductComp,
+        BannerduaComp,
         FooterComp,
     },
     data() {
         return {
             produk: [],
             rekomendasiProduk: [],
+            bannerdua:{}
         }
     },
     methods: {
@@ -63,12 +60,25 @@ export default{
                 alert('Maaf, silahkan check koneksi anda!' + error );
                 //console.log(error);
             })
-        },     
+        }, 
+        getBannerdua(){
+            axios
+            .get("http://127.0.0.1:8000/api/banner/dua")
+            .then((response) => {
+                this.bannerdua = response.data.data;
+                console.log(this.bannerdua);//debug
+            })
+            .catch((error) => {
+                alert('Maaf, silahkan check koneksi anda!' + error );
+                // console.log(error);
+            })
+        }    
     },
 
     mounted() {
         this.getProduk();
         this.getProdukRec();
+        this.getBannerdua();
     },
 };
 </script>
