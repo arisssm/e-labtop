@@ -8,8 +8,8 @@
                 </router-link>
             </div>
         </div>
-        <CheckoutComp/>
-        <RingkasanBelanjaComp/>
+        <CheckoutComp :keranjang="keranjang"/>
+        <RingkasanBelanjaComp :keranjang="keranjang"/>
         <FooterComp/>
     </div>
 </template>
@@ -20,6 +20,7 @@ import HeaderComp from '@/components/HeaderComp.vue';
 import CheckoutComp from '@/components/CheckoutComp.vue';
 import RingkasanBelanjaComp from '@/components/RingkasanBelanjaComp.vue';
 import FooterComp from '@/components/FooterComp.vue';
+import axios from 'axios';
 
 export default{
     name :"CheckoutPage",
@@ -28,6 +29,34 @@ export default{
         CheckoutComp,
         RingkasanBelanjaComp,                
         FooterComp,
+    },
+    data(){
+        return {
+            keranjang: [],
+        }
+    },
+    methods: {
+        getKeranjang(){
+            axios
+            .get('http://127.0.0.1:8000/api/keranjang')
+            .then((response) => {
+                this.keranjang = response.data.data;
+                // console.log(this.keranjang);//debug
+            })
+            .catch((error) => {
+                // alert('Maaf, silahkan check koneksi anda!' + error );
+                //console.log(error);
+                this.$toast.error(error, {
+                        type: "error",
+                        position: "top",
+                        duration: 2000,
+                    });
+            })
+        },
+    },
+    mounted() {
+        this.getKeranjang();
+        
     },
 };
 </script>

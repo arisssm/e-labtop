@@ -1,11 +1,11 @@
 <template>
     <div id="RingkasanBelanjaComp">
         <div class="container mb-5">
-            <div class="row mt-5">
+            <div class="row mt-5" v-for="item in keranjang" :key="item.id">
                 <h4 style="font-weight:600">Ringkasan Belanja</h4>
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                    <p class="pe-5 text-custom">Total Harga (1 Barang)<span class="ps-5 ms-3">Rp. 21.000.000</span></p>
-                    <p class="pe-5 text-custom">Total Ongkos Kirim<span class="ps-5 ms-5 ">Rp. 20.000</span></p>
+                    <p class="pe-5 text-custom">Total Harga {{ item.banyak }} Barang <span class="ps-5 ms-3">Rp. {{ Number(totalHarga).toLocaleString() }}</span></p>
+                    <p class="pe-5 text-custom">Total Ongkos Kirim<span class="ps-5 ms-5 ">Rp. {{ item.total_ongkir}}</span></p>
                     <p class="me-5 text-custom mt-5" style="font-weight:600;">Total Tagihan<span class="ps-5 ms-4"
                             style="color:#ff0000">Rp. 21.000.000</span></p>
                     <router-link to="/konfirmasipage" class="btn mt-3 me-5 btn-byr-sekarang text-custom">Bayar Sekarang
@@ -44,5 +44,18 @@
 <script>
 export default {
     name: "RingkasanBelanjaComp",
+    props: ["keranjang"],
+    data() {
+        return {
+            awal:0,
+        }
+    },
+    computed: {
+        totalHarga(){
+            return this.keranjang.reduce(function (item, data ) {
+                return item + data.produk.harga * data.banyak;
+            },0)
+        }
+    }
 };
 </script>
