@@ -17,9 +17,8 @@
                         <li class="nav-item mx-2">
                             <router-link to="/katalogpage" class="nav-link " style="color:#000000;">Katalog Laptop</router-link>
                         </li>
-
                     </ul>
-                    <router-link to="/katalogpage" class="btn btn-sm btn-keranjang">
+                    <router-link to="/keranjangpage" class="btn btn-sm btn-keranjang">
                         <i class="fa fa-cart-plus" aria-hidden="true"></i> Keranjang
                     </router-link>
                 </div>

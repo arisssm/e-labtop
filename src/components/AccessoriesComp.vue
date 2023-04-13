@@ -1,6 +1,6 @@
 <template>
     <div id="AccessoriesComp">
-        <div class="container">
+        <div class="container mt-5">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-6">
                     <h6 class="text-start" style="font-weight:600;">Aksesoris</h6>

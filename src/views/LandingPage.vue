@@ -4,13 +4,7 @@
         <BannerComp/>
         <LogoComp :merek='merek'/>
         <ProductComp :produk='produk'/>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <img class="promo1" src="../assets/promo1.png" alt="">
-                </div>
-            </div>
-        </div>
+        <BannersatuComp :bannersatu='bannersatu'/>
         <AccessoriesComp/>
         <FooterComp/>
     </div>
@@ -21,6 +15,7 @@ import HeaderComp from '@/components/HeaderComp.vue';
 import BannerComp from '@/components/BannerComp.vue';
 import LogoComp from '@/components/LogoComp.vue';
 import ProductComp from '@/components/ProductComp.vue';
+import BannersatuComp from '@/components/BannersatuComp.vue';
 import AccessoriesComp from '@/components/AccessoriesComp.vue';
 import FooterComp from '@/components/FooterComp.vue';
 import axios from 'axios';
@@ -33,6 +28,7 @@ export default{
         BannerComp, 
         LogoComp,
         ProductComp,
+        BannersatuComp,
         AccessoriesComp,
         FooterComp,
     },
@@ -40,7 +36,8 @@ export default{
     data(){
         return {
             merek: [],
-            produk: []
+            produk: [],
+            bannersatu: {}
         }
     },
 
@@ -51,6 +48,18 @@ export default{
             .then((response) => {
                 this.merek = response.data.data;
                 //console.log(this.merek);//debug
+            })
+            .catch((error) => {
+                alert('Maaf, silahkan check koneksi anda!' + error );
+                // console.log(error);
+            })
+        },
+        getBannersatu(){
+            axios
+            .get("http://127.0.0.1:8000/api/banner/satu")
+            .then((response) => {
+                this.bannersatu = response.data.data;
+                console.log(this.bannersatu);//debug
             })
             .catch((error) => {
                 alert('Maaf, silahkan check koneksi anda!' + error );
@@ -75,6 +84,7 @@ export default{
     mounted() {
         //fungsi yang langsung dijalanin saat halaman load;
         this.getMerek();
+        this.getBannersatu();
         this.getProdukRec();
         
     }
