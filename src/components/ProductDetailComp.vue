@@ -101,7 +101,7 @@ export default {
                     // console.log(response.data.message);
                         this.$toast.success(response.data.message, {
                             position: "top",
-                            duration: 2000,
+                            duration: 3000,
                             type: "success",
                         });
                 })
@@ -110,7 +110,7 @@ export default {
                     //console.log(error);
                     this.$toast.error(error, {
                             position: "top",
-                            duration: 2000,
+                            duration: 3000,
                             type: "error",
                         });
                 })
